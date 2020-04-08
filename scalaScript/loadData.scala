@@ -26,9 +26,7 @@ rockTracksDf.show(3)
 
 
 
-// get summary
-val rockSummary = rockTracksDfClean.describe()
-rockSummary.collect().foreach(println)
+
 
 // get correlation
 val corr1 = rockTracksDfClean.stat.corr("energy", "loudness")

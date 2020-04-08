@@ -1,14 +1,3 @@
-// Vector Assembler
-import org.apache.spark.ml.feature.VectorAssembler
-import org.apache.spark.ml.linalg.Vectors
-val assembler = new VectorAssembler().
-  setInputCols(Array("danceability", "energy", "key", "loudness", "mode",
-  				"speechiness","acousticness","instrumentalness","liveness",
-  				"valence", "tempo", "duration_ms", "time_signature")).
-  setOutputCol("features")
-
-val allTracksDfPrep = assembler.transform(allTracksDfClean).select("features","label")
-
 // Logistic Regression
 import org.apache.spark.ml.classification.LogisticRegression
 

@@ -28,8 +28,6 @@ val allTracksDfEnc = indexer.fit(allTracksDf).transform(allTracksDf)
 // show correspondance
 allTracksDfEnc.select("genre","label").groupBy("genre").mean().show()
 
-val allTracksDfClean = allTracksDfEnc.drop("genre")
-
 // Vector Assembler
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.linalg.Vectors
@@ -39,4 +37,4 @@ val assembler = new VectorAssembler().
   				"valence", "tempo", "duration_ms", "time_signature")).
   setOutputCol("features")
 
-val allTracksDfPrep = assembler.transform(allTracksDfClean).select("features","label")
+val allTracksDfPrep = assembler.transform(allTracksDfEnc).select("features","label","genre")
