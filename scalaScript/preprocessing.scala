@@ -22,9 +22,10 @@ import org.apache.spark.ml.feature.StringIndexer
 
 val indexer = new StringIndexer().
   setInputCol("genre").
-  setOutputCol("label")
+  setOutputCol("label").
+  fit(allTracksDf)
 
-val allTracksDfEnc = indexer.fit(allTracksDf).transform(allTracksDf)
+val allTracksDfEnc = indexer.transform(allTracksDf)
 // show correspondance
 allTracksDfEnc.select("genre","label").groupBy("genre").mean().show()
 

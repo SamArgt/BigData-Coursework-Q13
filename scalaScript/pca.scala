@@ -2,6 +2,7 @@ import org.apache.spark.ml.feature.StandardScaler
 import org.apache.spark.ml.feature.PCA
 import org.apache.spark.ml.linalg.Vectors
 
+// scaled the data
 val scaler = new StandardScaler().
   setInputCol("features").
   setOutputCol("scaledFeatures").
@@ -9,18 +10,23 @@ val scaler = new StandardScaler().
   setWithMean(true)
 
 val scalerModel = scaler.fit(allTracksDfPrep)
-
 val scaledData = scalerModel.transform(allTracksDfPrep)
 
+// Compute PCs
 val pca = new PCA().
   setInputCol("scaledFeatures").
   setOutputCol("pcaFeatures").
-  setK(2).
+  setK(3).
   fit(scaledData)
 
 val result = pca.transform(scaledData).select("pcaFeatures", "genre")
 result.show(3)
 
+// Compute cumulative Explained Variance
+pca.explainedVariance.toArray.sum
+
+
+// Export results
 import org.apache.spark.sql.functions._
 import org.apache.spark.ml._
 // A UDF to convert VectorUDT to ArrayType
@@ -32,7 +38,7 @@ val dfArr = result.withColumn("featuresArr" , vecToArray($"pcaFeatures") )
 // Array of element names that need to be fetched
 // ArrayIndexOutOfBounds is not checked.
 // sizeof `elements` should be equal to the number of entries in column `features`
-val elements = Array("pca1","pca2")
+val elements = Array("PC1","PC2","PC3")
 
 // Create a SQL-like expression using the array 
 val sqlExpr = elements.zipWithIndex.map{ case (alias, idx) => col("featuresArr").getItem(idx).as(alias) }

@@ -23,23 +23,3 @@ rockTracksDf.printSchema()
 
 // show three first lines
 rockTracksDf.show(3)
-
-
-
-
-
-// get correlation
-val corr1 = rockTracksDfClean.stat.corr("energy", "loudness")
-
-
-// convert to Dataset type
-case class AudioFeatures(danceability:Double, energy:Double, key:Int, 
-			loudness:Double, mode:Int, speechiness:Double, acousticness:Double, 
-			instrumentalness:Double, liveness:Double, valence:Double,
-  		tempo:Double, duration_ms:Int, time_signature:Int, genre:String)
-
-val rockTracksDs = rockTracksDf.as[AudioFeatures]
-
-
-
-
