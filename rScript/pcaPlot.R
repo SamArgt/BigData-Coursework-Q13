@@ -8,5 +8,8 @@ df = rbind(df0, df1, df2, df3, df4)
 
 library(ggplot2)
 
-ggplot(data=df, mapping=aes(x=pca1, y=pca2, color=genre))+
-	geom_point()
+ggplot(data=df, mapping=aes(x=PC1, y=PC2, color=genre))+
+	geom_point(size=2)+
+	theme(legend.text=element_text(size=16),
+			axis.title=element_text(size=15),
+			legend.title=element_text(size=17))
