@@ -47,5 +47,5 @@ val sqlExpr = elements.zipWithIndex.map{ case (alias, idx) => col("featuresArr")
 val output = dfArr.select( (col("genre") +: sqlExpr) :_*)
 
 
-output.write.format("csv").
-save("file:///home/user368/BigData-Coursework-Q13/data/pcaFeatures")
+//output.write.format("csv").
+//save("file:///home/user368/BigData-Coursework-Q13/data/pcaFeatures")
