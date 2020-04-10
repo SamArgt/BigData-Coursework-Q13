@@ -23,7 +23,7 @@ val result = pca.transform(scaledData).select("pcaFeatures", "genre")
 result.show(3)
 
 // Compute Explained Variance
-println(pca.explainedVariance.toArray)
+pca.explainedVariance.toArray.foreach(v => println(v))
 
 
 // Export results
