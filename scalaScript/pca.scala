@@ -22,8 +22,8 @@ val pca = new PCA().
 val result = pca.transform(scaledData).select("pcaFeatures", "genre")
 result.show(3)
 
-// Compute cumulative Explained Variance
-pca.explainedVariance.toArray.sum
+// Compute Explained Variance
+println(pca.explainedVariance.toArray)
 
 
 // Export results
