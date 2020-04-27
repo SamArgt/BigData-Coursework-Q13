@@ -21,6 +21,7 @@ There is an order to respect:
 3. The others
 
 pca.scala : Compute the first 3 principal components and save the output
+
 randomForest.scala and mlpClf.scala : train a randomForest and a MLP classifier respectively and print the accuracy.
 
 # Rscript/
